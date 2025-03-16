@@ -1,1 +1,124 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f8ff;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
 
+.container {
+    display: flex;
+    flex-direction: column; /* Imposta la direzione come colonna per il risultato */
+    padding: 20px;
+    height: 100vh; /* Impostiamo l'altezza massima a tutta la pagina */
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1000px;
+}
+
+h1 {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 1; /* Assicura che il titolo stia sopra al contenuto che scorre */
+    text-align: center;
+    color: #0066cc;
+    margin-bottom: 20px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Aggiunge una piccola ombra per separarlo dal contenuto */
+}
+
+.main-content {
+    display: flex;
+    justify-content: space-between; /* Spaziatura tra form e legenda */
+    margin-bottom: 20px;
+    flex: 1;
+    overflow: auto; /* Permette di scrollare solo il contenuto principale */
+}
+
+.form-container {
+    width: 48%; /* Imposta la larghezza al 48% per lasciare spazio alla legenda */
+}
+
+form {
+    flex: 1;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.legend-container {
+    width: 48%; /* Imposta la larghezza al 48% per lasciare spazio al form */
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.legend-item {
+    margin-bottom: 20px;
+}
+
+legend-item h3 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #0066cc;
+}
+
+/* Aggiungi uno spazio tra il form e la legenda */
+.legend-container img {
+    max-width: 100%;
+    margin-top: 10px;
+}
+
+label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    display: block;
+}
+
+input[type="number"],
+input[type="text"],
+select,
+input[type="submit"]{
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+input[type="submit"] {
+    width: 100%;
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #005bb5;
+}
+
+.result {
+    max-height: 400px; /* Imposta l'altezza massima per il risultato */
+    overflow-y: auto; /* Permette lo scroll verticale */
+    padding: 20px;
+    border: 1px solid #ddd;
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #e0f7fa;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.result p {
+    margin: 10px 0;
+}
