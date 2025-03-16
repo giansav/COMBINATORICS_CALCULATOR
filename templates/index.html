@@ -1,1 +1,124 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcolo Combinatorio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Calcolo Combinatorio</h1>
 
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+
+        <!-- Main content (form + legenda) -->
+        <div class="main-content">
+            <!-- Form -->
+            <div class="form-container">
+                <form method="post">
+                    <!-- Inserimento del numero di oggetti -->
+                    <label for="num_objects">Inserisci il numero di oggetti (n):</label>
+                    <input type="number" id="num_objects" name="num_objects" min="1" placeholder="Es. 5" oninput="toggleInputs()">
+
+                    <!-- Inserimento della lista di oggetti -->
+                    <label for="objects_list">Oppure, inserisci una lista di oggetti separati da virgola:</label>
+                    <input type="text" id="objects_list" name="objects_list" placeholder="Es. A,B,C,D" oninput="toggleInputs()">
+
+                    <!-- Inserimento della lunghezza delle combinazioni -->
+                    <label for="combinations_number">Inserisci la lunghezza della sequenza (k):</label>
+                    <input type="number" id="combinations_number" name="combinations_number" min="1" required placeholder="Es. 3">
+
+                    <!-- Scelta del tipo di calcolo -->
+                    <label for="calculation_type">Seleziona il tipo di calcolo:</label>
+                    <select id="calculation_type" name="calculation_type">
+                        <option value="permutations">Permutazioni</option>
+                        <option value="dispositions_no_repetition">Disposizioni senza ripetizioni</option>
+                        <option value="dispositions_with_repetition">Disposizioni con ripetizioni</option>
+                        <option value="combinations_no_repetition">Combinazioni senza ripetizioni</option>
+                        <option value="combinations_with_repetition">Combinazioni con ripetizioni</option>
+                    </select>
+
+                    <!-- Checkbox per mostrare solo il numero totale -->
+                    <label for="only_count">
+                        <input type="checkbox" id="only_count" name="only_count"> Mostra solo il numero totale
+                    </label>
+
+                    <!-- Bottone di invio -->
+                    <input type="submit" value="Calcola">
+                </form>
+            </div>
+
+            <!-- Legenda -->
+            <div class="legend-container">
+                <h3>Tipi di Calcolo</h3>
+                <ul>
+                    <li>
+                        <h4>Permutazioni</h4>
+                        <img src="{{ url_for('static', filename='images/perm.svg') }}" alt="Formula Permutazioni">
+                    </li>
+                    <li>
+                        <h4>Disposizioni senza ripetizioni</h4>
+                        <img src="{{ url_for('static', filename='images/arrang.svg') }}" alt="Formula Disposizioni senza ripetizioni">
+                    </li>
+                    <li>
+                        <h4>Disposizioni con ripetizioni</h4>
+                        <img src="{{ url_for('static', filename='images/arrang_rep.svg') }}" alt="Formula Disposizioni con ripetizioni">
+                    </li>
+                    <li>
+                        <h4>Combinazioni senza ripetizioni</h4>
+                        <img src="{{ url_for('static', filename='images/comb.svg') }}" alt="Formula Combinazioni senza ripetizioni">
+                    </li>
+                    <li>
+                        <h4>Combinazioni con ripetizioni</h4>
+                        <img src="{{ url_for('static', filename='images/comb_rep.svg') }}" alt="Formula Combinazioni con ripetizioni">
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Risultato -->
+        <div class="result">
+            {% if result %}
+                <p>{{ result['total_text'] }}</p>
+                {% if result['combinations'] %}
+                    <p>
+                        {% for combination in result['combinations'] %}
+                            {{ combination }}&nbsp;&nbsp;&nbsp;&nbsp;
+                        {% endfor %}
+                    </p>
+                {% endif %}
+            {% elif error %}
+                <p class="error">{{ error }}</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        // Funzione per disabilitare i campi alternativi
+        function toggleInputs() {
+            var numObjectsInput = document.getElementById("num_objects");
+            var objectsListInput = document.getElementById("objects_list");
+
+            // Se l'utente ha inserito qualcosa nel campo "numero oggetti", disabilita il campo "lista oggetti"
+            if (numObjectsInput.value) {
+                objectsListInput.disabled = true;
+            } else {
+                objectsListInput.disabled = false;
+            }
+
+            // Se l'utente ha inserito qualcosa nel campo "lista oggetti", disabilita il campo "numero oggetti"
+            if (objectsListInput.value) {
+                numObjectsInput.disabled = true;
+            } else {
+                numObjectsInput.disabled = false;
+            }
+        }
+
+        // Disabilita entrambi i campi all'inizio
+        window.onload = toggleInputs;
+    </script>
+</body>
+</html>
